@@ -8,6 +8,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [nombre, setNombre] = useState('');
+  const [rol, setRol] = useState('estudiante'); // Valor predeterminado: estudiante
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { register } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      await register(email, password, nombre);
+      await register(email, password, nombre, rol);
       navigate('/');
     } catch (err) {
       setError(err.message || 'Error al registrar usuario');
@@ -92,6 +93,20 @@ const Register = () => {
               className={styles.inputField}
               required
             />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label className={styles.inputLabel}>Rol</label>
+            <select
+              value={rol}
+              onChange={(e) => setRol(e.target.value)}
+              className={styles.inputField}
+              required
+            >
+              <option value="estudiante">Estudiante</option>
+              <option value="profesor">Profesor</option>
+              <option value="administrativo">Administrativo</option>
+            </select>
           </div>
 
           <button

@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('authUser');
   };
 
-  const register = (email, password, nombre) => {
+  const register = (email, password, nombre, rol) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // Verificar si el correo ya está registrado
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
           email,
           password,
           nombre,
-          rol: 'user'
+          rol: rol || 'estudiante' // Usamos el rol proporcionado o 'estudiante' por defecto
         };
         
         // En una aplicación real, aquí se enviaría la información a la API
