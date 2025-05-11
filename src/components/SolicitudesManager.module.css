@@ -18,11 +18,9 @@
   .managerContainer {
     max-width: 1000px;
     margin: 2rem auto;
-    border-radius: 20px;
+    border-radius: 0.5rem;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    background: white;
-    transform: perspective(1000px);
+    background-color: rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
   }
   
@@ -34,7 +32,7 @@
   /* Header */
   .managerHeader {
     padding: 1.5rem;
-    background: linear-gradient(135deg, #db0707, #db0707);
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
     position: relative;
     overflow: hidden;
@@ -193,6 +191,8 @@
     transition: all 0.3s ease;
     resize: vertical;
     margin-bottom: 1.5rem;
+    background-color: white;
+    color: #333;
   }
   
   .formTextarea:focus {

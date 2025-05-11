@@ -3,6 +3,8 @@ import { AuthContext } from '../context/AuthContext';
 import ChatbotAssistant from './ChatbotAssistant';
 import SolicitudesManager from './SolicitudesManager';
 import Foro from './Foro';
+import styles from './UdemTheme.module.css';
+import udemLogo from '../assets/udem-logo.png';
 
 // Componente para la sección de inicio
 const HomeSection = () => {
@@ -289,26 +291,26 @@ const handleSubmit = (e) => {
 const MainLayout = ({ onCreateSolicitud }) => {
   const [currentView, setCurrentView] = useState('home'); // Cambiado a 'home' como vista inicial
   const { user, logout } = useContext(AuthContext);
+  const userRole = user?.rol || 'estudiante'; // Default to student if role not specified
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header con color rojo */}
-      <header className="bg-gradient-to-r from-red-600 to-red-800 text-white p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Universidad de Medellín</h1>
-          <div className="flex items-center space-x-4">
-            <button 
-              onClick={() => setCurrentView('profile')}
-              className="flex items-center space-x-2 hover:bg-red-700 px-3 py-1 rounded transition"
-            >
-              <span className="w-8 h-8 rounded-full bg-white text-red-800 flex items-center justify-center font-bold">
-                {user?.nombre?.charAt(0)}
-              </span>
-              <span>{user?.nombre}</span>
-            </button>
+    <div className={styles.udemContainer}>
+      {/* Header */}
+      <header className={styles.udemHeader}>
+        <div className={styles.headerContent}>
+          <div className={styles.logoContainer}>
+            <img src={udemLogo} alt="Universidad de Medellín" className={styles.logo} />
+          </div>
+          <h1 className={styles.pageTitle}>
+            {userRole === 'admin' ? 'Panel Administrativo' : 
+             userRole === 'profesor' ? 'Portal Docente' : 
+             userRole === 'administrativo' ? 'Portal Administrativo' : 'Portal Estudiantil'}
+          </h1>
+          <div className={styles.userInfo}>
+            <span className={styles.userName}>{user?.nombre || 'Usuario'}</span>
             <button
               onClick={logout}
-              className="px-4 py-2 bg-white text-red-800 rounded-lg hover:bg-gray-100 transition"
+              className={styles.logoutButton}
             >
               Cerrar sesión
             </button>
@@ -316,61 +318,65 @@ const MainLayout = ({ onCreateSolicitud }) => {
         </div>
       </header>
 
-      {/* Barra de navegación con color rojo */}
-      <nav className="bg-white shadow-sm">
-        <div className="container mx-auto flex space-x-4 p-2 overflow-x-auto">
-          <button
-            onClick={() => setCurrentView('home')}
-            className={`px-4 py-2 rounded-lg transition whitespace-nowrap ${
-              currentView === 'home'
-                ? 'bg-red-100 text-red-800 font-medium'
-                : 'text-gray-700 hover:bg-gray-100'
-            }`}
-          >
-            Inicio
-          </button>
-          <button
-            onClick={() => setCurrentView('chatbot')}
-            className={`px-4 py-2 rounded-lg transition whitespace-nowrap ${
-              currentView === 'chatbot'
-                ? 'bg-red-100 text-red-800 font-medium'
-                : 'text-gray-700 hover:bg-gray-100'
-            }`}
-          >
-            Asistente Virtual
-          </button>
-          <button
-            onClick={() => setCurrentView('solicitudes')}
-            className={`px-4 py-2 rounded-lg transition whitespace-nowrap ${
-              currentView === 'solicitudes'
-                ? 'bg-red-100 text-red-800 font-medium'
-                : 'text-gray-700 hover:bg-gray-100'
-            }`}
-          >
-            Solicitudes
-          </button>
-          <button
-            onClick={() => setCurrentView('foro')}
-            className={`px-4 py-2 rounded-lg transition whitespace-nowrap ${
-              currentView === 'foro'
-                ? 'bg-red-100 text-red-800 font-medium'
-                : 'text-gray-700 hover:bg-gray-100'
-            }`}
-          >
-            Foro
-          </button>
-        </div>
-      </nav>
+      {/* Barra de navegación */}
+      <div className={styles.mainContent}>
+        <nav className={styles.navContainer}>
+          <div className={styles.navButtons}>
+            <button
+              onClick={() => setCurrentView('home')}
+              className={`${styles.navButton} ${
+                currentView === 'home' ? styles.navButtonActive : styles.navButtonInactive
+              }`}
+            >
+              Inicio
+            </button>
+            <button
+              onClick={() => setCurrentView('chatbot')}
+              className={`${styles.navButton} ${
+                currentView === 'chatbot' ? styles.navButtonActive : styles.navButtonInactive
+              }`}
+            >
+              Asistente Virtual
+            </button>
+            <button
+              onClick={() => setCurrentView('solicitudes')}
+              className={`${styles.navButton} ${
+                currentView === 'solicitudes' ? styles.navButtonActive : styles.navButtonInactive
+              }`}
+            >
+              Solicitudes
+            </button>
+            <button
+              onClick={() => setCurrentView('foro')}
+              className={`${styles.navButton} ${
+                currentView === 'foro' ? styles.navButtonActive : styles.navButtonInactive
+              }`}
+            >
+              Foro
+            </button>
+            {userRole === 'admin' && (
+              <button
+                onClick={() => setCurrentView('admin')}
+                className={`${styles.navButton} ${
+                  currentView === 'admin' ? styles.navButtonActive : styles.navButtonInactive
+                }`}
+              >
+                Administración
+              </button>
+            )}
+          </div>
+        </nav>
 
-      {/* Contenido principal */}
-      <main className="container mx-auto p-4 md:p-8">
-        {currentView === 'home' && <HomeSection />}
-        {currentView === 'chatbot' && <ChatbotAssistant />}
-        {currentView === 'solicitudes' && (
-          <SolicitudesManager onCreateSolicitud={onCreateSolicitud} />
-        )}
-        {currentView === 'foro' && <Foro />}
-      </main>
+        {/* Contenido principal */}
+        <main>
+          {currentView === 'home' && <HomeSection />}
+          {currentView === 'chatbot' && <ChatbotAssistant />}
+          {currentView === 'solicitudes' && (
+            <SolicitudesManager onCreateSolicitud={onCreateSolicitud} />
+          )}
+          {currentView === 'foro' && <Foro />}
+        </main>
+      </div>
     </div>
   );
 };

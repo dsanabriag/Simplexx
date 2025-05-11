@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
+import udemLogo from '../assets/udem-logo.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -30,6 +31,7 @@ const Login = () => {
     <div className={styles.loginContainer}>
       <div className={styles.loginCard}>
         <div className={styles.loginHeader}>
+          <img src={udemLogo} alt="Universidad de Medellín" className={styles.loginLogo} />
           <h1 className={styles.loginTitle}>Bienvenido a la Universidad de Medellín</h1>
           <p className={styles.loginSubtitle}>Inicia sesión para continuar</p>
         </div>

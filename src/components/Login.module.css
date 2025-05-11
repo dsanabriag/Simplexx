@@ -5,7 +5,7 @@
 
 /* ---------- Colores base ---------- */
 :root{
-  --udem-red:      #af0d24;   /* rojo institucional principal */
+  --udem-red:      #b71c1c;   /* rojo institucional principal */
   --udem-red-dark: #8f0b1d;   /* rojo más oscuro para hover */
   --panel-bg:      #f4efec;   /* fondo crema/gris muy claro del panel */
   --text-dark:     #111;      /* textos principales */
@@ -41,6 +41,13 @@
 
 /* ---------- Encabezado ---------- */
 .loginHeader{ text-align:center;margin-bottom:2rem }
+
+.loginLogo {
+  width: 120px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+}
 
 .loginTitle{
   font-size:1.6rem;
