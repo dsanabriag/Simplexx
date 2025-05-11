@@ -28,7 +28,7 @@ const Router = () => {
         path="/" 
         element={
           isAuthenticated 
-            ? (user?.rol === 'user' ? <MainLayout /> : <Navigate to="/admin" />)
+            ? (user?.rol === 'admin' ? <Navigate to="/admin" /> : <MainLayout />)
             : <PublicLayout />
         } 
       />

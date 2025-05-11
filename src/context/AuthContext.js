@@ -82,11 +82,20 @@ export const AuthProvider = ({ children }) => {
         
         // Simulamos la creación de un nuevo usuario
         // En una aplicación real, esto se haría con una API
+        
+        // Mapeamos el rol seleccionado al sistema de roles de la aplicación
+        // Solo 'admin' es tratado de forma especial, todos los demás son 'user'
+        let sistemaRol = 'user';
+        if (rol === 'administrativo') {
+          sistemaRol = 'admin';
+        }
+        
         const newUser = {
           email,
           password,
           nombre,
-          rol: rol || 'estudiante' // Usamos el rol proporcionado o 'estudiante' por defecto
+          rol: sistemaRol,
+          tipoUsuario: rol || 'estudiante' // Guardamos también el tipo específico de usuario
         };
         
         // En una aplicación real, aquí se enviaría la información a la API
@@ -96,7 +105,8 @@ export const AuthProvider = ({ children }) => {
         const userData = {
           email: newUser.email,
           nombre: newUser.nombre,
-          rol: newUser.rol
+          rol: newUser.rol,
+          tipoUsuario: newUser.tipoUsuario
         };
         
         setUser(userData);

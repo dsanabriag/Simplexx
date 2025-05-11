@@ -16,10 +16,16 @@ const AdminPanel = () => {
     const cargarSolicitudes = () => {
       setIsLoading(true);
       try {
-        const data = getSolicitudes();
-        setSolicitudes(data);
+        const response = getSolicitudes();
+        if (response.success) {
+          setSolicitudes(response.data);
+        } else {
+          console.error("Error al cargar solicitudes:", response.error);
+          setSolicitudes([]);
+        }
       } catch (error) {
         console.error("Error al cargar solicitudes:", error);
+        setSolicitudes([]);
       } finally {
         setIsLoading(false);
       }
@@ -37,8 +43,13 @@ const AdminPanel = () => {
   // Cambiar estado de una solicitud
   const cambiarEstado = (id, nuevoEstado) => {
     try {
-      actualizarEstado(id, nuevoEstado);
-      setSolicitudes(getSolicitudes());
+      const result = actualizarEstado(id, nuevoEstado);
+      if (result.success) {
+        const response = getSolicitudes();
+        if (response.success) {
+          setSolicitudes(response.data);
+        }
+      }
     } catch (error) {
       console.error("Error al actualizar estado:", error);
     }
@@ -49,8 +60,13 @@ const AdminPanel = () => {
     if (!respuestaActual) return;
     
     try {
-      resolverSolicitud(id, respuestaActual);
-      setSolicitudes(getSolicitudes());
+      const result = resolverSolicitud(id, respuestaActual);
+      if (result.success) {
+        const response = getSolicitudes();
+        if (response.success) {
+          setSolicitudes(response.data);
+        }
+      }
       setRespuestaActual('');
       setSelectedSolicitud(null);
     } catch (error) {
