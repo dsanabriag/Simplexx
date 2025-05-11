@@ -27,7 +27,7 @@
   width:100%;
   max-width:420px;
   padding:2.5rem;
-  background:var(--panel-bg);
+  background:white;
   border-radius:8px;
   box-shadow:0 8px 25px rgba(0,0,0,.25);
   backdrop-filter:blur(6px);
@@ -43,9 +43,9 @@
 .loginHeader{ text-align:center;margin-bottom:2rem }
 
 .loginLogo {
-  width: 120px;
+  width: 180px;
   height: auto;
-  margin: 0 auto 1rem;
+  margin: 0 auto 1.5rem;
   display: block;
 }
 
@@ -68,17 +68,21 @@
 
 .inputLabel{
   position:absolute;top:-10px;left:15px;
-  background:var(--panel-bg);
+  background:white;
   padding:0 5px;
-  font-size:.8rem;
+  font-size:.9rem;
+  font-weight: 500;
   color:var(--udem-red);
 }
 
 .inputField{
-  width:100%;padding:14px;
+  width:100%;
+  padding:14px;
   border:2px solid var(--border-input);
   border-radius:6px;
   font-size:1rem;
+  background-color: #f9f9f9;
+  color: #333;
   transition:border .25s,box-shadow .25s;
 }
 

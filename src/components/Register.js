@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './Login.module.css'; // Reutilizamos los estilos del login
+import themeStyles from './UdemTheme.module.css';
+import udemLogo from '../assets/udem-logo.png';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -37,10 +39,11 @@ const Register = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
-      <div className={styles.loginCard}>
+    <div className={`${styles.loginContainer} ${themeStyles.udemContainer}`}>
+      <div className={`${styles.loginCard} ${themeStyles.formContainer}`}>
         <div className={styles.loginHeader}>
-          <h1 className={styles.loginTitle}>Registro de Usuario</h1>
+          <img src={udemLogo} alt="Universidad de Medellín" className={styles.loginLogo} />
+          <h1 className={`${styles.loginTitle} ${themeStyles.sectionTitle}`}>Registro de Usuario</h1>
           <p className={styles.loginSubtitle}>Crea una cuenta para acceder a todos los servicios</p>
         </div>
         
@@ -51,56 +54,56 @@ const Register = () => {
         )}
 
         <form onSubmit={handleSubmit} className={styles.loginForm}>
-          <div className={styles.inputGroup}>
-            <label className={styles.inputLabel}>Nombre Completo</label>
+          <div className={`${styles.inputGroup} ${themeStyles.formGroup}`}>
+            <label className={`${styles.inputLabel} ${themeStyles.formLabel}`}>Nombre Completo</label>
             <input
               type="text"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
-              className={styles.inputField}
+              className={`${styles.inputField} ${themeStyles.formInput}`}
               required
             />
           </div>
 
-          <div className={styles.inputGroup}>
-            <label className={styles.inputLabel}>Correo Electrónico</label>
+          <div className={`${styles.inputGroup} ${themeStyles.formGroup}`}>
+            <label className={`${styles.inputLabel} ${themeStyles.formLabel}`}>Correo Electrónico</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={styles.inputField}
+              className={`${styles.inputField} ${themeStyles.formInput}`}
               required
             />
           </div>
           
-          <div className={styles.inputGroup}>
-            <label className={styles.inputLabel}>Contraseña</label>
+          <div className={`${styles.inputGroup} ${themeStyles.formGroup}`}>
+            <label className={`${styles.inputLabel} ${themeStyles.formLabel}`}>Contraseña</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={styles.inputField}
+              className={`${styles.inputField} ${themeStyles.formInput}`}
               required
             />
           </div>
 
-          <div className={styles.inputGroup}>
-            <label className={styles.inputLabel}>Confirmar Contraseña</label>
+          <div className={`${styles.inputGroup} ${themeStyles.formGroup}`}>
+            <label className={`${styles.inputLabel} ${themeStyles.formLabel}`}>Confirmar Contraseña</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={styles.inputField}
+              className={`${styles.inputField} ${themeStyles.formInput}`}
               required
             />
           </div>
 
-          <div className={styles.inputGroup}>
-            <label className={styles.inputLabel}>Rol</label>
+          <div className={`${styles.inputGroup} ${themeStyles.formGroup}`}>
+            <label className={`${styles.inputLabel} ${themeStyles.formLabel}`}>Rol</label>
             <select
               value={rol}
               onChange={(e) => setRol(e.target.value)}
-              className={styles.inputField}
+              className={`${styles.inputField} ${themeStyles.formSelect}`}
               required
             >
               <option value="estudiante">Estudiante</option>
@@ -109,22 +112,24 @@ const Register = () => {
             </select>
           </div>
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={styles.submitButton}
-          >
+          <div className={themeStyles.formActions}>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`${styles.submitButton} ${themeStyles.actionButton} ${themeStyles.approveButton}`}
+            >
             {isLoading ? (
               <span>Registrando...</span>
             ) : (
-              <span>Registrarse</span>
+              <span>Crear Cuenta</span>
             )}
           </button>
+          </div>
 
-          <div className="mt-4 text-center">
-            <p className="text-gray-600">
+          <div className={themeStyles.formFooter}>
+            <p className={themeStyles.formFooterText}>
               ¿Ya tienes una cuenta?{' '}
-              <Link to="/login" className="text-red-600 hover:underline">
+              <Link to="/login" className={themeStyles.formLink}>
                 Iniciar sesión
               </Link>
             </p>

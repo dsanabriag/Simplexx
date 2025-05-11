@@ -267,8 +267,30 @@
 .formActions {
   display: flex;
   justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Form footer */
+.formFooter {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.formFooterText {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.formLink {
+  color: #b71c1c;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.formLink:hover {
+  text-decoration: underline;
 }
 
 /* Response options */
