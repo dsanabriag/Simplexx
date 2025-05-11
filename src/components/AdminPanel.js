@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { getSolicitudes, actualizarEstado, resolverSolicitud } from '../mock/api';
+import RespuestasAutomaticas from './RespuestasAutomaticas';
 import styles from './AdminPanel.module.css';
 
 const AdminPanel = () => {
@@ -197,6 +198,12 @@ const AdminPanel = () => {
                   {/* Formulario de respuesta */}
                   {selectedSolicitud === solicitud.id && (
                     <div className={styles.responseForm}>
+                      {/* Componente de respuestas automáticas */}
+                      <RespuestasAutomaticas 
+                        onSelectRespuesta={(respuesta) => setRespuestaActual(respuesta)}
+                        solicitudTipo={solicitud.tipo}
+                      />
+                      
                       <textarea
                         value={respuestaActual}
                         onChange={(e) => setRespuestaActual(e.target.value)}
