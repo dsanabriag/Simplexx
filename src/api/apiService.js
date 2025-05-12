@@ -63,6 +63,7 @@ export const searchLocalData = (query, localData) => {
     };
   };
 
+  
   // Palabras clave más específicas para cada categoría
   const keywords = {
     programas: {
